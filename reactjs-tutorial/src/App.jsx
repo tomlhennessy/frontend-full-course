@@ -1,10 +1,19 @@
-
+import Layout from './components/layouts/Layout'
+import Hero from './components/Hero'
+import Clocks from './components/Clocks'
+import Calendar from './components/Calendar'
+import Summary from './components/Summary'
 
 function App() {
 
 
   return (
-    <div></div>
+    <Layout>
+      <Hero />
+      <Clocks />
+      <Calendar />
+      <Summary />
+    </Layout>
   )
 }
 

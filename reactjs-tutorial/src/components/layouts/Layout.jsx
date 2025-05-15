@@ -1,5 +1,22 @@
-export default function Layout() {
+
+export default function Layout(props) {
+    const { children } = props
+
+    const header = (
+        <header></header>
+    )
+
+    const footer = (
+        <footer></footer>
+    )
+
     return (
-        <div></div>
+        <div>
+            {header}
+            <main>
+                {children}
+            </main>
+            {footer}
+        </div>
     )
 }
