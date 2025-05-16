@@ -1,5 +1,8 @@
 export default function Clocks() {
     return (
-        <div></div>
+        <section id="clocks">
+            <p><i>Time remaining in different units.</i></p>
+            <div className='clocks-grid'></div>
+        </section>
     )
 }
