@@ -19,7 +19,7 @@ function App() {
       <Hero name={name} data={data} percentage={percentage}/>
       <Clocks data={data} />
       <Calendar lifeExpectancy={lifeExpectancy} data={data} />
-      <Summary />
+      <Summary lifeExpectancy={lifeExpectancy} birthDate={birthDate} />
     </Layout>
   )
 }
