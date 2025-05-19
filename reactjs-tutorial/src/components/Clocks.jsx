@@ -1,5 +1,26 @@
+import { getTimePercentage } from "../utils"
+
+function Clock(props) {
+    const { percent, title, data } = props
+
+    return (
+        <div className='card clock-card'>
+            <div className='circle' style={{transform: `rotate(${Math.round(percent)}deg)`}}>
+                <div className={'ticker ' + title}>
+
+                </div>
+            </div>
+            <div>
+                <h5>{data}</h5>
+                <p>{title}</p>
+            </div>
+        </div>
+    )
+}
+
 export default function Clocks(props) {
     const { data } = props
+    const snapshot = getTimePercentage()
 
     return (
         <section id="clocks">
@@ -7,17 +28,7 @@ export default function Clocks(props) {
             <div className='clocks-grid'>
                 {Object.keys(data).map((clock, clockIndex) => {
                     return (
-                        <div key={clockIndex} className='card clock-card'>
-                            <div className='circle' style={{}}>
-                                <div className={'ticker ' + ''}>
-                                    
-                                </div>
-                            </div>
-                            <div>
-                                <h5>{data[clock]}</h5>
-                                <p>{clock}</p>
-                            </div>
-                        </div>
+                        <Clock data={data[clock]} title={clock} key={clockIndex} percent={snapshot[clock]} />
                     )
                 })}
             </div>
