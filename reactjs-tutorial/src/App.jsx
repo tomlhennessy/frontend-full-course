@@ -17,7 +17,7 @@ function App() {
   return (
     <Layout>
       <Hero name={name} data={data} percentage={percentage}/>
-      <Clocks />
+      <Clocks data={data} />
       <Calendar />
       <Summary />
     </Layout>
