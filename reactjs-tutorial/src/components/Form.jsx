@@ -1,5 +1,13 @@
+import { useState } from "react"
+
 export default function Form(props) {
   const { handleCloseModal, handleUpdateData } = props
+
+  const [month, setMonth] = useState(1)
+  const [day, setDay] = useState(1)
+  const [year, setYear] = useState(new Date().getFullYear())
+  const [name, setName] = useState('Tom')
+  const [lifeExpectancy, setLifeExpectancy] = useState(80)
 
   const days = Array.from({ length: 31 }, (_, i) => i + 1)
   const months = [
@@ -18,26 +26,34 @@ export default function Form(props) {
       </div>
       <div>
         <label>Name</label>
-        <input type='text' required />
+        <input value={name} onChange={(e) => {
+          setName(e.target.value)
+        }} type='text' required />
       </div>
       <div>
         <label>Birthday</label>
         <div className='bday'>
-          <select>
+          <select value={day} onChange={(e) => {
+            setDay(e.target.value)
+          }}>
             {days.map((d) => {
               return (
                 <option key={d} value={d}>{d}</option>
               )
             })}
           </select>
-          <select>
+          <select value={month} onChange={(e) => {
+            setMonth(e.target.value)
+          }}>
             {months.map((m, i) => {
               return (
                 <option key={i} value={i + 1}>{m}</option>
               )
             })}
           </select>
-          <select>
+          <select value={year} onChange={(e) => {
+            setYear(e.target.value)
+          }}>
             {years.map((y) => {
               return (
                 <option key={y} value={y}>{y}</option>
@@ -48,9 +64,13 @@ export default function Form(props) {
       </div>
       <div>
         <label>Life expectancy (years)</label>
-        <input type='number' max={120} required />
+        <input value={lifeExpectancy} onChange={(e) => {
+            setLifeExpectancy(e.target.value)
+          }} type='number' max={120} required />
       </div>
-      <button onClick={() => {}}>
+      <button onClick={() => {
+        handleUpdateData(name, `${year}-${month}-${day}`, lifeExpectancy)
+      }}>
         Save
       </button>
     </section>

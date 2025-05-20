@@ -1,6 +1,6 @@
 
 export default function Hero(props) {
-  const { name, lifeExpectancy, data, percentage, handleToggleModal } = props
+  const { name, lifeExpectancy, data, percentage, handleToggleModal, resetData } = props
 
   return (
     <section id="hero">
@@ -9,11 +9,14 @@ export default function Hero(props) {
       </h3>
       <div className='btns-container'>
         <button onClick={handleToggleModal}>Not {name}?</button>
-        <button className='link-button'>Copy link</button>
-        <button className='link-button'>Reset data</button>
+        <button onClick={() => {
+          navigator.clipboard.writeText('https://www.blablabla.com')
+          alert('copied :)')
+        }} className='link-button'>Copy link</button>
+        <button onClick={resetData} className='link-button'>Reset data</button>
       </div>
       <div className='progress-bar'>
-        <div>
+        <div style={{width: `${percentage}`}}>
           <div>
             <i className='fa-solid fa-baby' />
             <h6 className='bar-label'>Birth</h6>
