@@ -1,6 +1,6 @@
 
 export default function Hero(props) {
-  const { name, lifeExpectancy, data, percentage } = props
+  const { name, lifeExpectancy, data, percentage, handleToggleModal } = props
 
   return (
     <section id="hero">
@@ -8,7 +8,7 @@ export default function Hero(props) {
         {name}, you have {data.weeks} weeks left. Make them count 🫡
       </h3>
       <div className='btns-container'>
-        <button>Not {name}?</button>
+        <button onClick={handleToggleModal}>Not {name}?</button>
         <button className='link-button'>Copy link</button>
         <button className='link-button'>Reset data</button>
       </div>

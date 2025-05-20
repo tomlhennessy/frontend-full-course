@@ -6,23 +6,29 @@ import Summary from './components/Summary'
 import { calculateTimeLeft, getLifePercentageLived } from './utils'
 import Portal from './components/Portal'
 import Form from './components/Form'
+import { useState } from 'react'
 
 function App() {
-  const birthDate = '1995-06-15'
-  const lifeExpectancy = 80
-  const data = calculateTimeLeft(birthDate, lifeExpectancy)
-  console.log(data)
-  const name = 'Tom'
-  const showModal = true
+  const [name, setName] = useState('Tom')
+  const [birthDate, setBirthDate] = useState('1995-06-15')
+  const [lifeExpectancy, setLifeExpectancy] = useState(80)
+  const [showModal, setShowModal] = useState(false)
 
+  function handleToggleModal() {
+    setShowModal(!showModal)
+  }
+
+  const data = calculateTimeLeft(birthDate, lifeExpectancy)
   const percentage = getLifePercentageLived(birthDate, lifeExpectancy)
 
   return (
     <Layout>
-      {showModal && (<Portal>
-        <Form />
-      </Portal>)}
-      <Hero name={name} data={data} percentage={percentage}/>
+      {showModal && (
+        <Portal handleCloseModal={handleToggleModal}>
+          <Form handleCloseModal={handleToggleModal}/>
+        </Portal>
+    )}
+      <Hero handleToggleModal={handleToggleModal} name={name} data={data} percentage={percentage}/>
       <Clocks data={data} />
       <Calendar lifeExpectancy={lifeExpectancy} data={data} />
       <Summary lifeExpectancy={lifeExpectancy} birthDate={birthDate} />

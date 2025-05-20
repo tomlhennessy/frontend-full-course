@@ -46,6 +46,13 @@ export default function Form(props) {
           </select>
         </div>
       </div>
+      <div>
+        <label>Life expectancy (years)</label>
+        <input type='number' max={120} required />
+      </div>
+      <button onClick={() => {}}>
+        Save
+      </button>
     </section>
   )
 }
