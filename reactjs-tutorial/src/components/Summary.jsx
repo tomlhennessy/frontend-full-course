@@ -9,6 +9,8 @@ export default function Summary(props) {
         <i className='fa-solid fa-heart-crack' />
         You&apos;ll probably die in the year <strong>{finalYear}</strong> at the age of {lifeExpectancy}.
       </p>
+      <h4>Yesterday is history, tomorrow is a mystery, and today is a gift.<br />That&apos;s why they call it the present.</h4>
+      <h4>Master Oogway</h4>
     </section>
   )
 }
