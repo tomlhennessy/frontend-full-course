@@ -13,6 +13,6 @@
         <Hero {name} {percentage} {data}/>
         <Clocks {data} />
         <Calendar {data} {lifeExpectancy} />
-        <Summary />
+        <Summary {birthDate} {lifeExpectancy} />
     {/snippet}
 </Layout>
