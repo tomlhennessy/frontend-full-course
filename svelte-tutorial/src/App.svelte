@@ -12,7 +12,7 @@
     {#snippet headache({data, birthDate, name, percentage, lifeExpectancy})}
         <Hero {name} {percentage} {data}/>
         <Clocks {data} />
-        <Calendar />
+        <Calendar {data} {lifeExpectancy} />
         <Summary />
     {/snippet}
 </Layout>
