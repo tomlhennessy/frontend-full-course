@@ -1,10 +1,10 @@
 <script>
-    const name = 'Tom'
+    const { name, percentage, data } = $props();
 </script>
 
 <section id="hero">
     <h3 class='text-large'>
-        {name}
+        {name}, you have {data["weeks"]} weeks left. Make them count 🫡
     </h3>
     <div class='btns-container'>
         <button>Not {name}?</button>

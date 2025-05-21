@@ -9,9 +9,9 @@
 </script>
 
 <Layout>
-    {#snippet headache()}
-        <Hero />
-        <Clocks />
+    {#snippet headache({data, birthDate, name, percentage, lifeExpectancy})}
+        <Hero {name} {percentage} {data}/>
+        <Clocks {data} />
         <Calendar />
         <Summary />
     {/snippet}

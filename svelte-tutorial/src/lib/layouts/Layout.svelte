@@ -1,6 +1,14 @@
 <script>
+    import { calculateTimeLeft, getLifePercentageLived } from "../../utils";
+
     const { headache } = $props();
 
+    let birthDate = '1995-06-15'
+    let lifeExpectancy = 80
+    let name = 'Tom'
+
+    let data = calculateTimeLeft(birthDate, lifeExpectancy)
+    let percentage = getLifePercentageLived(birthDate, lifeExpectancy)
 </script>
 
 <header>
@@ -9,7 +17,7 @@
 
 <main>
     <!-- this is where the children will go -->
-    {@render headache()}
+    {@render headache({data, birthDate, name, percentage, lifeExpectancy})}
 </main>
 
 
