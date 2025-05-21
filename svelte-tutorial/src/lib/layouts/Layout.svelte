@@ -3,12 +3,12 @@
 
     const { headache } = $props();
 
-    let birthDate = '1995-06-15'
-    let lifeExpectancy = 80
-    let name = 'Tom'
+    let birthDate = $state('1995-06-15')
+    let lifeExpectancy = $state(80)
+    let name = $state('Tom')
 
-    let data = calculateTimeLeft(birthDate, lifeExpectancy)
-    let percentage = getLifePercentageLived(birthDate, lifeExpectancy)
+    let data = $state(() => calculateTimeLeft(birthDate, lifeExpectancy))
+    let percentage = $derived(getLifePercentageLived(birthDate, lifeExpectancy))
 </script>
 
 <header>

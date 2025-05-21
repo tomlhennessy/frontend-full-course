@@ -1,7 +1,7 @@
 <script>
     let { lifeExpectancy, birthDate } = $props();
 
-    const finalYear = parseInt(birthDate.split("-")[0]) + lifeExpectancy
+    const finalYear = $derived(parseInt(birthDate.split("-")[0]) + lifeExpectancy)
 </script>
 
 <section id="summary">
