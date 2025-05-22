@@ -1,15 +1,43 @@
 <script>
     import { calculateTimeLeft, getLifePercentageLived } from "../../utils";
+    import Form from "../Form.svelte";
+    import Portal from "../Portal.svelte";
 
     const { headache } = $props();
 
-    let birthDate = $state('1995-06-15')
-    let lifeExpectancy = $state(80)
+    let showModal = $state(false)
+    function handleToggleModal() {
+        showModal = !showModal
+    }
+
+    let defaultBD = '1995-06-15'
+    let defaultLE = 80
+    let birthDate = $state(defaultBD)
+    let lifeExpectancy = $state(defaultLE)
     let name = $state('Tom')
 
-    let data = $state(() => calculateTimeLeft(birthDate, lifeExpectancy))
+    let data = $state(calculateTimeLeft(defaultBD, defaultLE))
     let percentage = $derived(getLifePercentageLived(birthDate, lifeExpectancy))
+
+    function handleUpdateData(n, b, e) {
+        if (!n || !b || !e) {
+            return
+        }
+
+        name = n
+        birthDate = b
+        lifeExpectancy = parseInt(e)
+        showModal = false
+    }
 </script>
+
+{#if showModal}
+    <Portal handleCloseModal={handleToggleModal}>
+        {#snippet form()}
+            <Form {handleUpdateData} />
+        {/snippet}
+    </Portal>
+{/if}
 
 <header>
     <h1 class='text-medium text-gradient'>Unalive</h1>
@@ -17,7 +45,7 @@
 
 <main>
     <!-- this is where the children will go -->
-    {@render headache({data, birthDate, name, percentage, lifeExpectancy})}
+    {@render headache({data, birthDate, name, percentage, lifeExpectancy, handleToggleModal})}
 </main>
 
 

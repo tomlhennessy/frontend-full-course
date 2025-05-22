@@ -1,5 +1,5 @@
 <script>
-    const { name, percentage, data } = $props();
+    const { name, percentage, data, handleToggleModal } = $props();
 </script>
 
 <section id="hero">
@@ -7,7 +7,7 @@
         {name}, you have {data["weeks"]} weeks left. Make them count 🫡
     </h3>
     <div class='btns-container'>
-        <button>Not {name}?</button>
+        <button onclick={handleToggleModal}>Not {name}?</button>
         <button class='link-button'>Copy link</button>
         <button class='link-button'>Reset data</button>
     </div>
