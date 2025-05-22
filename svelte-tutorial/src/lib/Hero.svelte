@@ -1,5 +1,5 @@
 <script>
-    const { name, percentage, data, handleToggleModal } = $props();
+    const { name, percentage, data, handleToggleModal, resetData } = $props();
 </script>
 
 <section id="hero">
@@ -8,16 +8,19 @@
     </h3>
     <div class='btns-container'>
         <button onclick={handleToggleModal}>Not {name}?</button>
-        <button class='link-button'>Copy link</button>
-        <button class='link-button'>Reset data</button>
+        <button onclick={() => {
+            navigator.clipboard.writeText('https://www.LINK.com')
+            alert("Copied :)")
+        }} class='link-button'>Copy link</button>
+        <button onclick={resetData} class='link-button'>Reset data</button>
     </div>
     <div class='progress-bar'>
-        <div>
+        <div style:width={percentage}>
             <div>
                 <i class='fa-solid fa-baby'></i>
                 <h6 class='bar-label'>Birth</h6>
             </div>
-            <h6>{65}%</h6>
+            <h6>{percentage}</h6>
         </div>
         <div>
             <h6 class='bar-label'>Death</h6>

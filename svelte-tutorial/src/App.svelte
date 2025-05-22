@@ -9,8 +9,8 @@
 </script>
 
 <Layout>
-    {#snippet headache({data, birthDate, name, percentage, lifeExpectancy, handleToggleModal})}
-        <Hero {name} {percentage} {data} {handleToggleModal}/>
+    {#snippet headache({data, birthDate, name, percentage, lifeExpectancy, handleToggleModal, resetData})}
+        <Hero {name} {percentage} {data} {handleToggleModal} {resetData}/>
         <Clocks {data} />
         <Calendar {data} {lifeExpectancy} />
         <Summary {birthDate} {lifeExpectancy} />

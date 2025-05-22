@@ -24,17 +24,52 @@
             return
         }
 
+        // save to local storage
+        localStorage.setItem("formData", JSON.stringify({
+            name: n,
+            birthDate: b,
+            lifeExpectancy: e
+        }))
+
         name = n
         birthDate = b
         lifeExpectancy = parseInt(e)
+        data = calculateTimeLeft(b, parseInt(e))
         showModal = false
     }
+
+    function resetData() {
+        name = 'Tom'
+        birthDate = defaultBD
+        lifeExpectancy = defaultLE
+        data = calculateTimeLeft(defaultBD, defaultLE)
+        localStorage.clear()
+    }
+
+    $effect(() => {
+        const interval = setInterval(() => {
+            data = calculateTimeLeft(birthDate, lifeExpectancy)
+        }, 1000)
+        return () => clearInterval(interval)
+    })
+
+    $effect(() => {
+        if (!localStorage) { return }
+
+        if (localStorage.getItem("formData")) {
+            const { name: n, birthDate: b, lifeExpectancy: e } = JSON.parse(localStorage.getItem("formData"))
+                name = n
+                birthDate = b
+                lifeExpectancy = parseInt(e)
+                data = calculateTimeLeft(b, parseInt(e))
+        }
+    })
 </script>
 
 {#if showModal}
     <Portal handleCloseModal={handleToggleModal}>
         {#snippet form()}
-            <Form {handleUpdateData} />
+            <Form {handleUpdateData} handleCloseModal={handleToggleModal} />
         {/snippet}
     </Portal>
 {/if}
@@ -45,7 +80,7 @@
 
 <main>
     <!-- this is where the children will go -->
-    {@render headache({data, birthDate, name, percentage, lifeExpectancy, handleToggleModal})}
+    {@render headache({data, birthDate, name, percentage, lifeExpectancy, handleToggleModal, resetData})}
 </main>
 
 
