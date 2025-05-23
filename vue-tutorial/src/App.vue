@@ -25,7 +25,7 @@
   <Layout>
     <Hero :name="name" :data="data" />
     <Clocks v-bind="totalProps" />
-    <Calendar />
+    <Calendar v-bind="totalProps" />
     <Summary />
   </Layout>
 </template>
