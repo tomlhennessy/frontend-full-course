@@ -5,12 +5,26 @@
   import Calendar from './components/Calendar.vue'
   import Summary from './components/Summary.vue'
 
+  import { calculateTimeLeft } from './utils'
+
+  const birthDate = '1995-06-15'
+  const lifeExpectancy = 80
+  const name = 'Tom'
+  const data = calculateTimeLeft(birthDate, lifeExpectancy)
+  console.log(data)
+
+  const totalProps = {
+    birthDate,
+    lifeExpectancy,
+    name,
+    data
+  }
 </script>
 
 <template>
   <Layout>
-    <Hero />
-    <Clocks />
+    <Hero :name="name" :data="data" />
+    <Clocks v-bind="totalProps" />
     <Calendar />
     <Summary />
   </Layout>
