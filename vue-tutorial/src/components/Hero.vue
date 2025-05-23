@@ -1,7 +1,8 @@
 <script setup>
-    const { name, data } = defineProps({
+    const { name, data, handleToggleModal } = defineProps({
         name: String,
-        data: Object
+        data: Object,
+        handleToggleModal: Function
     })
 </script>
 
@@ -11,7 +12,7 @@
             {{ name }}, you have {{ data['weeks'] }} weeks left. Make them count 🫡
         </h3>
         <div class="btns-container">
-            <button>Not {{ name }}?</button>
+            <button @click="handleToggleModal">Not {{ name }}?</button>
             <button class="link-button">Copy link</button>
             <button class="link-button">Reset data</button>
         </div>

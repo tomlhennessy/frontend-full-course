@@ -47,9 +47,9 @@
 <template>
   <Layout>
     <Portal :handleCloseModal="handleToggleModal" :showModal="showModal">
-      <Form />
+      <Form :handleCloseModal="handleToggleModal" :handleUpdateData="handleUpdateData" />
     </Portal>
-    <Hero :name="name" :data="data" />
+    <Hero :name="name" :data="data" :handleToggleModal="handleToggleModal" />
     <Clocks v-bind="totalProps" />
     <Calendar v-bind="totalProps" />
     <Summary />
