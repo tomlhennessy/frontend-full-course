@@ -2,13 +2,13 @@
     import { computed } from 'vue'
     const { data, lifeExpectancy } = defineProps({
         data: Object,
-        lifeExpectancy: Number
+        lifeExpectancy: Object
     })
 
-    const yearsArr = computed(() => [...Array(lifeExpectancy).keys()])
+    const yearsArr = computed(() => [...Array(lifeExpectancy.value).keys()])
     const weeksArr = [...Array(52).keys()]
-    const weekNum = computed(() => lifeExpectancy * 52 - parseInt(data['weeks']))
-    const finalWeek = computed(() => lifeExpectancy * 52)
+    const weekNum = computed(() => lifeExpectancy.value * 52 - parseInt(data.value['weeks']))
+    const finalWeek = computed(() => lifeExpectancy.value * 52)
 
     function getWeeksArr(wksArr, yrIndex) {
         return wksArr.map((val, valIndex) => {

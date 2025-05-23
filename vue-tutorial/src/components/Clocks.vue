@@ -12,12 +12,13 @@
     <section id="clocks">
         <p><i>Time remaining in different units.</i></p>
         <div class="clocks-grid">
-            <div class="card clock-card" v-for="(clock, clockIndex) in Object.keys(data)" :key="clockIndex">
+            <div class="card clock-card" v-for="(clock, clockIndex) in Object.keys(data.value)" :key="clockIndex">
                 <div class="circle" :style="{rotate: snapshot[clock] + 'deg'}">
                     <div class="ticker" :class="{[clock]: true}"></div>
                 </div>
                 <div>
-                    <h5>{{ data[clock] }}</h5>
+                    <h5>{{ data.value[clock] }}</h5>
+                    <p>{{ clock }}</p>
                 </div>
             </div>
         </div>
