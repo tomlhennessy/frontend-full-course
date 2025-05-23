@@ -1,9 +1,15 @@
 <script setup>
-    const { name, data, handleToggleModal } = defineProps({
+    const { name, data, handleToggleModal, percentage, resetData } = defineProps({
         name: String,
         data: Object,
-        handleToggleModal: Function
+        handleToggleModal: Function,
+        percentage: String,
+        resetData: Function
     })
+
+    function copyLink() {
+        navigator.clipboard.writeText('https://www.LINK.com')
+    }
 </script>
 
 <template>
@@ -14,15 +20,15 @@
         <div class="btns-container">
             <button @click="handleToggleModal">Not {{ name }}?</button>
             <button class="link-button">Copy link</button>
-            <button class="link-button">Reset data</button>
+            <button @click="resetData" class="link-button">Reset data</button>
         </div>
         <div class="progress-bar">
-            <div :style="{'width': `65%` }">
+            <div :style="{'width': percentage }">
                 <div>
                     <i class="fa-solid fa-baby"></i>
                     <h6 class="bar-label">Birth</h6>
                 </div>
-                <h6>{{ 45 }}%</h6>
+                <h6>{{ percentage }}</h6>
             </div>
             <div>
                 <h6 class="bar-label">Death</h6>

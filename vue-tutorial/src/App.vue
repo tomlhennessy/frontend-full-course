@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue'
+  import { ref, computed, onMounted, watchEffect } from 'vue'
   import Layout from './components/layouts/Layout.vue'
   import Hero from './components/Hero.vue'
   import Clocks from './components/Clocks.vue'
@@ -8,7 +8,7 @@
   import Portal from './components/Portal.vue'
   import Form from './components/Form.vue'
 
-  import { calculateTimeLeft } from './utils'
+  import { calculateTimeLeft, getLifePercentageLived } from './utils'
 
   const defaultBD = '1995-06-15'
   const defaultLE = 80
@@ -17,6 +17,7 @@
   const name = ref('Tom')
   const data = ref(calculateTimeLeft(defaultBD, defaultLE))
   console.log(data)
+  let percentage = computed(() => getLifePercentageLived(birthDate.value, lifeExpectancy.value))
 
   const showModal = ref(false)
   function handleToggleModal() {
@@ -27,6 +28,11 @@
     if (!n || !b || !e) { return }
 
     // save new data to localStorage (browser db)
+    localStorage.setItem('formData', JSON.stringify({
+      name: n,
+      birthDate: b,
+      lifeExpectancy: e
+    }))
 
     name.value = n
     birthDate.value = b
@@ -36,12 +42,43 @@
 
   }
 
+  function resetData() {
+    name.value = 'Tom'
+    birthDate.value = defaultBD
+    lifeExpectancy.value = defaultLE
+    data.value = calculateTimeLeft(defaultBD, defaultLE)
+    localStorage.clear()
+  }
+
   const totalProps = {
     birthDate,
     lifeExpectancy,
     name,
-    data
+    data,
+    percentage
   }
+
+  onMounted(() => {
+    // is executed on component mount
+    if (!localStorage) { return }
+
+    if (localStorage.getItem('formData')) {
+      const { name: n, birthDate: b, lifeExpectancy: e } = JSON.parse(localStorage.getItem('formData'))
+
+      name.value = n
+      birthDate.value = b
+      lifeExpectancy.value = parseInt(e)
+      data.value = calculateTimeLeft(b, parseInt(e))
+    }
+  })
+
+  watchEffect((onCleanup) => {
+    const interval = setInterval(() => {
+      data.value = calculateTimeLeft(birthDate.value, lifeExpectancy.value)
+    }, 1000)
+
+    onCleanup(() => clearInterval(interval))
+  })
 </script>
 
 <template>
@@ -49,7 +86,7 @@
     <Portal :handleCloseModal="handleToggleModal" :showModal="showModal">
       <Form :handleCloseModal="handleToggleModal" :handleUpdateData="handleUpdateData" />
     </Portal>
-    <Hero :name="name" :data="data" :handleToggleModal="handleToggleModal" />
+    <Hero :resetData="resetData" :name="name" :data="data" :handleToggleModal="handleToggleModal" :percentage="percentage" />
     <Clocks v-bind="totalProps" />
     <Calendar v-bind="totalProps" />
     <Summary />
